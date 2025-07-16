@@ -1,0 +1,80 @@
+﻿@model TrabajadoresApp.Models.Trabajador
+
+@{
+    ViewData["Title"] = "Registrar Trabajador";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group mb-2">
+                <label asp-for="TipoDocumento" class="form-label"></label>
+                <select asp-for="TipoDocumento" class="form-select" asp-items="ViewBag.TiposDocumento">
+                    <option value="">-- Seleccione --</option>
+                </select>
+                <span asp-validation-for="TipoDocumento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="NumeroDocumento" class="form-label"></label>
+                <input asp-for="NumeroDocumento" class="form-control" />
+                <span asp-validation-for="NumeroDocumento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Nombres" class="form-label"></label>
+                <input asp-for="Nombres" class="form-control" />
+                <span asp-validation-for="Nombres" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="Sexo" class="form-label"></label>
+                <select asp-for="Sexo" class="form-select">
+                    <option value="">-- Seleccione --</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+                <span asp-validation-for="Sexo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="IdDepartamento" class="form-label"></label>
+                <select asp-for="IdDepartamento" class="form-select" asp-items="ViewBag.Departamentos">
+                    <option value="">-- Seleccione --</option>
+                </select>
+                <span asp-validation-for="IdDepartamento" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-2">
+                <label asp-for="IdProvincia" class="form-label"></label>
+                <select asp-for="IdProvincia" class="form-select" asp-items="ViewBag.Provincias">
+                    <option value="">-- Seleccione --</option>
+                </select>
+                <span asp-validation-for="IdProvincia" class="text-danger"></span>
+            </div>
+
+            <div class="form-group mb-3">
+                <label asp-for="IdDistrito" class="form-label"></label>
+                <select asp-for="IdDistrito" class="form-select" asp-items="ViewBag.Distritos">
+                    <option value="">-- Seleccione --</option>
+                </select>
+                <span asp-validation-for="IdDistrito" class="text-danger"></span>
+            </div>
+
+            <div class="mt-3">
+                <button type="submit" class="btn btn-success">Registrar</button>
+                <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

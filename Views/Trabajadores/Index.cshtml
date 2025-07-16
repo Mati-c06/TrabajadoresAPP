@@ -1,0 +1,54 @@
+﻿@model IEnumerable<TrabajadoresApp.Models.Trabajador>
+
+@{
+    ViewData["Title"] = "Listado de Trabajadores";
+    string filtroSexo = ViewBag.FiltroSexo as string ?? "";
+}
+
+<h3>@ViewData["Title"]</h3>
+
+<form method="get" class="mb-3">
+    <label for="filtroSexo" class="form-label">Filtrar por Sexo:</label>
+    <select id="filtroSexo" name="filtroSexo" class="form-select w-auto d-inline-block me-2" onchange="this.form.submit()">
+        <option value="">-- Todos --</option>
+        <option value="M" selected="@(filtroSexo == "M")">Masculino</option>
+        <option value="F" selected="@(filtroSexo == "F")">Femenino</option>
+    </select>
+    <a asp-action="Index" class="btn btn-outline-secondary">Limpiar Filtro</a>
+</form>
+
+<a asp-action="Create" class="btn btn-primary mb-3">+ Nuevo Trabajador</a>
+
+<table class="table table-bordered">
+    <thead class="table-light">
+        <tr>
+            <th>Tipo Documento</th>
+            <th>Nro Documento</th>
+            <th>Nombres</th>
+            <th>Sexo</th>
+            <th>Departamento</th>
+            <th>Provincia</th>
+            <th>Distrito</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var filaColor = item.Sexo == "F" ? "background-color: orange;" : "background-color: lightblue;";
+            <tr style="@filaColor">
+                <td>@item.TipoDocumento</td>
+                <td>@item.NumeroDocumento</td>
+                <td>@item.Nombres</td>
+                <td>@item.Sexo</td>
+                <td>@item.NombreDepartamento</td>
+                <td>@item.NombreProvincia</td>
+                <td>@item.NombreDistrito</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-warning btn-sm">Editar</a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro de eliminar el registro?');">Eliminar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
